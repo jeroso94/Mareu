@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Mareu</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="list_of_meetings_fragment_label">Liste des réunions</string>
+    <string name="read_meeting_fragment_label">Détail de la réservation</string>
+    <string name="next">Détail</string>
+    <string name="previous">Liste</string>
+    <string name="create_meeting">Nouveau</string>
+
+    <string name="hello_first_fragment">Fragment qui contient la liste des reunions (RecyclerView) </string>
+    <string name="hello_second_fragment">Fragment qui contient le détail de la réservation</string>
+
+    <!-- Create or Read a meeting -->
+    <string name="meeting_subject">Sujet de la réunion</string>
+    <string name="meeting_date">Date de la réunion</string>
+    <string name="meeting_start_time">Heure de début</string>
+    <string name="meeting_end_time">Heure de fin</string>
+    <string name="meeting_room">Salle</string>
+    <string name="meeting_guests_list">Liste des invités</string>
+    <string name="save_button">Enregistrer</string>
+
+    <!-- Only for Read-->
+    <string name="content_description_baseline_people">people</string>
+    <string name="meeting_details">Enregistrée pour le jj/mm/aaaa de hh:mm à hh:mm en salle xxx </string>
+    <string name="action_1">Modifier</string>
+    <string name="action_2">Suivant</string>
+
+    <!-- Only for Create-->
+    <string name="create_meeting_activity_label">Nouvelle réunion</string>
+    <string name="empty_field_error">Saisie requise !</string>
+    <string name="meeting_date_picker_title">Sélectionner une date</string>
+
+    <!-- Meeting headline -->
+    <string name="meeting_headline_title">Sujet de réunion - HH:MM - Salle</string>
+    <string name="meeting_headline_guests_list">guest1, guest2, etc</string>
+    <string name="meeting_headline_thumbnail">Type</string>
+    <string name="meeting_headline_delete_button">Corbeille</string>
+
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="space_between_columns">16dp</dimen>
+    <dimen name="space_between_lines">8dp</dimen>
+    <dimen name="large_space_between_lines">16dp</dimen>
+
+</resources>
