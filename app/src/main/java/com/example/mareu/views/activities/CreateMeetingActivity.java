@@ -41,7 +41,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
     private MeetingApi mMeetingApi;
     private MeetingsModel oneMeeting;
 
-    void runDatePicker(){
+    void buildDatePicker(){
         mDatePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText(R.string.meeting_date_picker_title)
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
@@ -62,7 +62,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
         });
     }
 
-    void runTimePicker(){
+    void buildTimePicker(){
 
         mStartTimePicker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
@@ -108,17 +108,23 @@ public class CreateMeetingActivity extends AppCompatActivity {
         });
     }
 
-    void runRoomDropDownList() {
+    void generateSampleRooms(){
         sampleRooms = Arrays.asList(
-                new RoomsModel(1, "Interne", "Mario"),
-                new RoomsModel(2, "Interne", "Luigi"),
-                new RoomsModel(3, "Interne", "Peach")
+                new RoomsModel(1978, "Interne", "Mario"),
+                new RoomsModel(1990, "Interne", "Luigi"),
+                new RoomsModel(2050, "Interne", "Peach")
         );
-        Log.d("runRoomDropDownList()", "sampleRooms=" + sampleRooms.size());
+    }
 
+    void buildRoomDropDownList() {
 
+        List<String> roomNames = new ArrayList<String>();
+        for (RoomsModel extractedRoom:sampleRooms) {
+            roomNames.add(extractedRoom.getName());
+        }
 
-
+        mArrayAdapter = new ArrayAdapter(CreateMeetingActivity.this, R.layout.list_of_rooms, roomNames);
+        mActivityCreateMeetingBinding.meetingRoomDropdownList.setAdapter(mArrayAdapter);
     }
 
     int checkData(){
@@ -154,15 +160,39 @@ public class CreateMeetingActivity extends AppCompatActivity {
     }
 
     void storeData(){
+
+        long selectedRoomId = 0;
+        for (RoomsModel extractedRoom:sampleRooms) {
+            /*
+            Log.d("storeData()", "storeData: extractedRoom="+ extractedRoom.getName());
+            Log.d("storeData()", "storeData: roomSelected="+ mActivityCreateMeetingBinding.meetingRoomDropdownList.getText().toString());
+
+             */
+            if  (extractedRoom.getName().equals(mActivityCreateMeetingBinding.meetingRoomDropdownList.getText().toString())) {
+                selectedRoomId = extractedRoom.getId();
+            }
+        }
+
         oneMeeting = new MeetingsModel(
                 System.currentTimeMillis(),
                 mActivityCreateMeetingBinding.meetingSubject.getEditText().getText().toString(),
                 mActivityCreateMeetingBinding.meetingDate.getEditText().getText().toString(),
                 mActivityCreateMeetingBinding.meetingStartTime.getEditText().getText().toString(),
                 mActivityCreateMeetingBinding.meetingEndTime.getEditText().getText().toString(),
-                2,
+                selectedRoomId,
                 mActivityCreateMeetingBinding.meetingGuestsList.getEditText().getText().toString()
         );
+
+        /*
+        Log.d("storeData()", "storeData: oneMeeting.id="+ oneMeeting.getId());
+        Log.d("storeData()", "storeData: oneMeeting.subject="+ oneMeeting.getSubject());
+        Log.d("storeData()", "storeData: oneMeeting.date="+ oneMeeting.getMeetingDate());
+        Log.d("storeData()", "storeData: oneMeeting.start="+ oneMeeting.getStartTime());
+        Log.d("storeData()", "storeData: oneMeeting.end="+ oneMeeting.getEndTime());
+        Log.d("storeData()", "storeData: oneMeeting.roomid="+ oneMeeting.getRoomId());
+        Log.d("storeData()", "storeData: oneMeeting.guests="+ oneMeeting.getGuestsList());
+
+         */
     }
 
     void saveMeeting(){
@@ -188,17 +218,21 @@ public class CreateMeetingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkData() != 1 ) {
-                    Snackbar.make(v, "Execution de storeData() et saveMeeting()", Snackbar.LENGTH_LONG)
+                    /*Snackbar.make(v, "Execution de storeData() et saveMeeting()", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-                    //storeData();
+
+                     */
+                    storeData();
                     //saveMeeting();
                 }
             }
         });
 
-        runDatePicker();
-        runTimePicker();
-        runRoomDropDownList();
+        generateSampleRooms();
+
+        buildDatePicker();
+        buildTimePicker();
+        buildRoomDropDownList();
 
     }
 
