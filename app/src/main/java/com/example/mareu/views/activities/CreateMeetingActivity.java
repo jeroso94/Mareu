@@ -1,17 +1,14 @@
 package com.example.mareu.views.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CalendarView;
-import android.widget.Spinner;
 
 
 import com.example.mareu.R;
+import com.example.mareu.controllers.DI;
 import com.example.mareu.controllers.MeetingApi;
 import com.example.mareu.databinding.ActivityCreateMeetingBinding;
 import com.example.mareu.models.MeetingsModel;
@@ -24,11 +21,7 @@ import com.google.android.material.timepicker.TimeFormat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 public class CreateMeetingActivity extends AppCompatActivity {
 
@@ -183,7 +176,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 mActivityCreateMeetingBinding.meetingGuestsList.getEditText().getText().toString()
         );
 
-        /*
+
         Log.d("storeData()", "storeData: oneMeeting.id="+ oneMeeting.getId());
         Log.d("storeData()", "storeData: oneMeeting.subject="+ oneMeeting.getSubject());
         Log.d("storeData()", "storeData: oneMeeting.date="+ oneMeeting.getMeetingDate());
@@ -192,7 +185,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
         Log.d("storeData()", "storeData: oneMeeting.roomid="+ oneMeeting.getRoomId());
         Log.d("storeData()", "storeData: oneMeeting.guests="+ oneMeeting.getGuestsList());
 
-         */
+        saveMeeting();
     }
 
     void saveMeeting(){
@@ -214,6 +207,12 @@ public class CreateMeetingActivity extends AppCompatActivity {
         // NAVIGATION ActionBar - Affiche la flêche de retour à l'écran d'accueil (dépendant de AndroidManifest.xml - option de thème ActionBar activée, par défaut + indication parentActivityName)
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mMeetingApi = DI.getService();
+        buildDatePicker();
+        buildTimePicker();
+        generateSampleRooms();
+        buildRoomDropDownList();
+
         mActivityCreateMeetingBinding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,17 +222,9 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
                      */
                     storeData();
-                    //saveMeeting();
                 }
             }
         });
-
-        generateSampleRooms();
-
-        buildDatePicker();
-        buildTimePicker();
-        buildRoomDropDownList();
-
     }
 
     // NAVIGATION ActionBar - Gérer l'action au click sur la fl^che de retour
