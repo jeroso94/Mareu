@@ -15,6 +15,16 @@ public class MeetingControllers implements MeetingApi{
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public List<MeetingsModel> getAllMeetings() {
+        return mMeetings;
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * CRUD - CREATE A MEETING
      * @param oneMeeting
      */
 
@@ -23,4 +33,28 @@ public class MeetingControllers implements MeetingApi{
         mMeetings.add(oneMeeting);
         Log.d("MeetingControllers", "createMeeting: " + mMeetings.get(3).getSubject());
     }
+
+
+    /**
+     * {@inheritDoc}
+     * CRUD - READ A MEETING
+     */
+
+
+    /**
+     * {@inheritDoc}
+     * CRUD - UPDATE A MEETING
+     */
+
+
+    /**
+     * {@inheritDoc}
+     * CRUD - DELETE A MEETING
+     * @param oneMeetingId
+     */
+    @Override
+    public void deleteMeeting(Integer oneMeetingId) {
+        mMeetings.remove(oneMeetingId);
+    }
+
 }

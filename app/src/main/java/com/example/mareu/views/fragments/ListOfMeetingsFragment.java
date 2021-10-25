@@ -1,20 +1,75 @@
 package com.example.mareu.views.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
+import com.example.mareu.controllers.DI;
+import com.example.mareu.controllers.ItemClickSupport;
+import com.example.mareu.controllers.MeetingApi;
 import com.example.mareu.databinding.FragmentListOfMeetingsBinding;
+import com.example.mareu.models.MeetingsModel;
+import com.example.mareu.views.recycler.MeetingHeadlineAdapter;
 
-public class ListOfMeetingsFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private FragmentListOfMeetingsBinding binding;
+public class ListOfMeetingsFragment extends Fragment implements MeetingHeadlineAdapter.Listener {
+
+    private FragmentListOfMeetingsBinding mFragmentListOfMeetingsBinding;
+    private MeetingApi mMeetingApi;
+    private List<MeetingsModel> mMeetings;
+    private MeetingHeadlineAdapter mMeetingHeadlineAdapter;
+
+    @Override
+    public void onClickDeleteButton(int position) {
+        mMeetingApi.deleteMeeting(position);
+        loadListOfMeetings();
+    }
+
+    /**
+     * Configure onClick listener for RecyclerView
+     */
+    private void recyclerViewOnClickListener(){
+        ItemClickSupport.addTo(mFragmentListOfMeetingsBinding.listOfMeetings, R.layout.fragment_meeting_headline)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        MeetingsModel meeting = mMeetingHeadlineAdapter.getMeeting(position);
+                        Toast.makeText(getContext(), "You clicked on user : "+meeting.getSubject(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    /**
+     * Configure RecyclerView to load the List of meetings
+     */
+    private void loadListOfMeetings() {
+        mMeetings = mMeetingApi.getAllMeetings();
+        // Create adapter passing in the sample user data
+        mMeetingHeadlineAdapter = new MeetingHeadlineAdapter(this.mMeetings, this);
+        // Attach the adapter to the recyclerview to populate items
+        mFragmentListOfMeetingsBinding.listOfMeetings.setAdapter(this.mMeetingHeadlineAdapter);
+        // Set layout manager to position the items
+        mFragmentListOfMeetingsBinding.listOfMeetings.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mMeetingApi = DI.getService();
+    }
 
     @Override
     public View onCreateView(
@@ -22,15 +77,17 @@ public class ListOfMeetingsFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentListOfMeetingsBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        mFragmentListOfMeetingsBinding = FragmentListOfMeetingsBinding.inflate(inflater, container, false);
+        loadListOfMeetings();
+        recyclerViewOnClickListener();
+        return mFragmentListOfMeetingsBinding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonMeetingDetail.setOnClickListener(new View.OnClickListener() {
+        mFragmentListOfMeetingsBinding.buttonMeetingDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(ListOfMeetingsFragment.this)
@@ -42,7 +99,7 @@ public class ListOfMeetingsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        mFragmentListOfMeetingsBinding = null;
     }
 
 }

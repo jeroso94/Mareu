@@ -154,15 +154,15 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
     void storeData(){
 
-        long selectedRoomId = 0;
-        for (RoomsModel extractedRoom:sampleRooms) {
+        long requestedRoomId = 0;
+        for (RoomsModel room:sampleRooms) {
             /*
-            Log.d("storeData()", "storeData: extractedRoom="+ extractedRoom.getName());
+            Log.d("storeData()", "storeData: room="+ room.getName());
             Log.d("storeData()", "storeData: roomSelected="+ mActivityCreateMeetingBinding.meetingRoomDropdownList.getText().toString());
 
              */
-            if  (extractedRoom.getName().equals(mActivityCreateMeetingBinding.meetingRoomDropdownList.getText().toString())) {
-                selectedRoomId = extractedRoom.getId();
+            if  (room.getName().equals(mActivityCreateMeetingBinding.meetingRoomDropdownList.getText().toString())) {
+                requestedRoomId = room.getId();
             }
         }
 
@@ -172,7 +172,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 mActivityCreateMeetingBinding.meetingDate.getEditText().getText().toString(),
                 mActivityCreateMeetingBinding.meetingStartTime.getEditText().getText().toString(),
                 mActivityCreateMeetingBinding.meetingEndTime.getEditText().getText().toString(),
-                selectedRoomId,
+                requestedRoomId,
                 mActivityCreateMeetingBinding.meetingGuestsList.getEditText().getText().toString()
         );
 
