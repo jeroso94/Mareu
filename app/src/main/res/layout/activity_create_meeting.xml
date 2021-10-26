@@ -109,6 +109,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_between_lines"
+
             android:hint="@string/meeting_room"
 
             app:layout_constraintEnd_toEndOf="parent"
