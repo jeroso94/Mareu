@@ -19,7 +19,7 @@
             app:popupTheme="@style/Theme.Mareu.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/fragment_navigation" />
+    <include layout="@layout/fragment_splitview" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

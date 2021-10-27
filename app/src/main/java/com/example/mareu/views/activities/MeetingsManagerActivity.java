@@ -10,19 +10,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.mareu.databinding.ActivityMeetingsManagerBinding;
+import com.example.mareu.views.fragments.ListOfMeetingsFragment;
+import com.example.mareu.views.fragments.ReadMeetingFragment;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MeetingsManagerActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityMeetingsManagerBinding binding;
 
     public void startCreateMeetingActivity (FragmentActivity activity){
@@ -39,9 +42,14 @@ public class MeetingsManagerActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.fragment_navigation);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        //1 - Get our FragmentManager & FragmentTransaction (Inside an activity)
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //2 - Load a new fragment inside a layout container and add it into activty
+        fragmentTransaction.add(R.id.list_of_meetings_container, ListOfMeetingsFragment.class, null);
+        fragmentTransaction.add(R.id.ReadMeeting_container, ReadMeetingFragment.class, null);
+        fragmentTransaction.commit();
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +87,13 @@ public class MeetingsManagerActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        return super.onSupportNavigateUp();
+/*
         NavController navController = Navigation.findNavController(this, R.id.fragment_navigation);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+
+ */
     }
+
 }

@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by JeroSo94 on 12/10/2021.
  */
-public class MeetingHeadlineAdapter extends RecyclerView.Adapter<MeetingHeadlineHolder> {
+public class ListOfMeetingsAdapter extends RecyclerView.Adapter<MeetingHeadlineHolder> {
 
     public interface Listener {
         void onClickDeleteButton(int position);
@@ -30,7 +30,7 @@ public class MeetingHeadlineAdapter extends RecyclerView.Adapter<MeetingHeadline
     private List<MeetingsModel> mMeetings;
 
     // CONSTRUCTOR
-    public MeetingHeadlineAdapter(List<MeetingsModel> meetings, Listener callback) {
+    public ListOfMeetingsAdapter(List<MeetingsModel> meetings, Listener callback) {
         this.mMeetings = meetings;
         this.mCallback = callback;
     }
@@ -48,7 +48,7 @@ public class MeetingHeadlineAdapter extends RecyclerView.Adapter<MeetingHeadline
     // UPDATE VIEW HOLDER WITH A RECORDED MEETING
     @Override
     public void onBindViewHolder(MeetingHeadlineHolder holder, int position) {
-        Log.d("MeetingHeadlineAdapter", "onBindViewHolder: mMeetings_position"+ position);
+        Log.d("ListOfMeetingsAdapter", "onBindViewHolder: mMeetings_position"+ position);
         holder.updateWithMeetingDetails(this.mMeetings.get(position), this.mCallback);
     }
 

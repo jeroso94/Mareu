@@ -1,16 +1,13 @@
 package com.example.mareu.views.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,17 +17,16 @@ import com.example.mareu.controllers.ItemClickSupport;
 import com.example.mareu.controllers.MeetingApi;
 import com.example.mareu.databinding.FragmentListOfMeetingsBinding;
 import com.example.mareu.models.MeetingsModel;
-import com.example.mareu.views.recycler.MeetingHeadlineAdapter;
+import com.example.mareu.views.recycler.ListOfMeetingsAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ListOfMeetingsFragment extends Fragment implements MeetingHeadlineAdapter.Listener {
+public class ListOfMeetingsFragment extends Fragment implements ListOfMeetingsAdapter.Listener {
 
     private FragmentListOfMeetingsBinding mFragmentListOfMeetingsBinding;
     private MeetingApi mMeetingApi;
     private List<MeetingsModel> mMeetings;
-    private MeetingHeadlineAdapter mMeetingHeadlineAdapter;
+    private ListOfMeetingsAdapter mListOfMeetingsAdapter;
 
     @Override
     public void onClickDeleteButton(int position) {
@@ -46,8 +42,9 @@ public class ListOfMeetingsFragment extends Fragment implements MeetingHeadlineA
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                        MeetingsModel meeting = mMeetingHeadlineAdapter.getMeeting(position);
+                        MeetingsModel meeting = mListOfMeetingsAdapter.getMeeting(position);
                         Toast.makeText(getContext(), "You clicked on user : "+meeting.getSubject(), Toast.LENGTH_SHORT).show();
+                        ReadMeetingFragment.newInstance(meeting.getId());
                     }
                 });
     }
@@ -58,9 +55,9 @@ public class ListOfMeetingsFragment extends Fragment implements MeetingHeadlineA
     private void loadListOfMeetings() {
         mMeetings = mMeetingApi.getAllMeetings();
         // Create adapter passing in the sample user data
-        mMeetingHeadlineAdapter = new MeetingHeadlineAdapter(this.mMeetings, this);
+        mListOfMeetingsAdapter = new ListOfMeetingsAdapter(this.mMeetings, this);
         // Attach the adapter to the recyclerview to populate items
-        mFragmentListOfMeetingsBinding.listOfMeetings.setAdapter(this.mMeetingHeadlineAdapter);
+        mFragmentListOfMeetingsBinding.listOfMeetings.setAdapter(this.mListOfMeetingsAdapter);
         // Set layout manager to position the items
         mFragmentListOfMeetingsBinding.listOfMeetings.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -87,6 +84,7 @@ public class ListOfMeetingsFragment extends Fragment implements MeetingHeadlineA
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        /*
         mFragmentListOfMeetingsBinding.buttonMeetingDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +92,8 @@ public class ListOfMeetingsFragment extends Fragment implements MeetingHeadlineA
                         .navigate(R.id.action_ListOfMeetingsFragment_to_ReadMeetingFragment);
             }
         });
+
+         */
     }
 
     @Override

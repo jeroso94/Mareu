@@ -23,8 +23,16 @@ public interface MeetingApi {
     void createMeeting(MeetingsModel oneMeeting);
 
     /**
-     * Delete a meeting
-     * @param oneMeetingId
+     * Read a meeting
+     * @param meetingId
+     * @return {@Link MeetingsModel}
      */
-    void deleteMeeting(Integer oneMeetingId);
+
+    MeetingsModel readMeeting(Long meetingId);
+
+    /**
+     * Delete a meeting
+     * @param index
+     */
+    void deleteMeeting(Integer index);
 }

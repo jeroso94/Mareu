@@ -21,7 +21,7 @@ import java.util.List;
 public class MeetingHeadlineHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private FragmentMeetingHeadlineBinding mFragmentMeetingHeadlineBinding;
-    private WeakReference<MeetingHeadlineAdapter.Listener> callbackWeakRef;
+    private WeakReference<ListOfMeetingsAdapter.Listener> callbackWeakRef;
     private List<RoomsModel> sampleRooms;
 
     public MeetingHeadlineHolder(View itemView) {
@@ -31,7 +31,7 @@ public class MeetingHeadlineHolder extends RecyclerView.ViewHolder implements Vi
         mFragmentMeetingHeadlineBinding = FragmentMeetingHeadlineBinding.inflate(inflater);
     }
 
-    public void updateWithMeetingDetails(MeetingsModel oneMeeting, MeetingHeadlineAdapter.Listener callback){
+    public void updateWithMeetingDetails(MeetingsModel oneMeeting, ListOfMeetingsAdapter.Listener callback){
 
         sampleRooms = Arrays.asList(
                 new RoomsModel(1978, "Interne", "Mario"),
@@ -55,7 +55,7 @@ public class MeetingHeadlineHolder extends RecyclerView.ViewHolder implements Vi
 
     @Override
     public void onClick(View view) {
-        MeetingHeadlineAdapter.Listener callback = callbackWeakRef.get();
+        ListOfMeetingsAdapter.Listener callback = callbackWeakRef.get();
         if (callback != null) callback.onClickDeleteButton(getAdapterPosition());
     }
 }

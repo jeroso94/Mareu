@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.mareu.models.MeetingsModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,8 +37,15 @@ public class MeetingControllers implements MeetingApi{
     /**
      * {@inheritDoc}
      * CRUD - READ A MEETING
+     * @return MeetingsModel
      */
-
+    @Override
+    public MeetingsModel readMeeting(Long meetingId) {
+        for (MeetingsModel oneMeeting:mMeetings) {
+            if (oneMeeting.getId() == meetingId) return oneMeeting;
+        }
+        return null;
+    }
 
     /**
      * {@inheritDoc}
@@ -50,11 +56,11 @@ public class MeetingControllers implements MeetingApi{
     /**
      * {@inheritDoc}
      * CRUD - DELETE A MEETING
-     * @param oneMeetingId
+     * @param index
      */
     @Override
-    public void deleteMeeting(Integer oneMeetingId) {
-        mMeetings.remove(oneMeetingId);
+    public void deleteMeeting(Integer index) {
+        mMeetings.remove(index);
     }
 
 }
