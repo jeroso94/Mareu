@@ -47,9 +47,7 @@ public class MeetingsManagerActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //2 - Load a new fragment inside a layout container and add it into activty
-        fragmentTransaction.add(R.id.list_of_meetings_container, ListOfMeetingsFragment.class, null);
-        fragmentTransaction.add(R.id.ReadMeeting_container, ReadMeetingFragment.class, null);
-        fragmentTransaction.commit();
+        fragmentTransaction.add(R.id.meetings_manager_container, ListOfMeetingsFragment.class, null).addToBackStack(null).commit();
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
