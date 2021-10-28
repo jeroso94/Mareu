@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +45,10 @@ public class ListOfMeetingsFragment extends Fragment implements ListOfMeetingsAd
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         MeetingsModel meeting = mListOfMeetingsAdapter.getMeeting(position);
                         Toast.makeText(getContext(), "You clicked on user : "+meeting.getSubject(), Toast.LENGTH_SHORT).show();
-                        ReadMeetingFragment.newInstance(meeting.getId());
+                        //ReadMeetingFragment.newInstance(meeting.getId());
+                        AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                        ReadMeetingFragment readMeetingFragment = ReadMeetingFragment.newInstance(meeting.getId());
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.meetings_manager_container,readMeetingFragment).addToBackStack(null).commit();
                     }
                 });
     }
