@@ -18,13 +18,13 @@ import java.util.List;
 /**
  * Created by JeroSo94 on 12/10/2021.
  */
-public class MeetingHeadlineHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ListOfMeetingsHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private FragmentMeetingHeadlineBinding mFragmentMeetingHeadlineBinding;
     private WeakReference<ListOfMeetingsAdapter.Listener> callbackWeakRef;
     private List<RoomsModel> sampleRooms;
 
-    public MeetingHeadlineHolder(View itemView) {
+    public ListOfMeetingsHolder(View itemView) {
         super(itemView);
         Context context = itemView.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -45,7 +45,7 @@ public class MeetingHeadlineHolder extends RecyclerView.ViewHolder implements Vi
             }
         }
 
-        Log.d("MeetingHeadlineHolder", "updateWithMeetingDetails: "+ oneMeeting.getSubject());
+        Log.d("ListOfMeetingsHolder", "updateWithMeetingDetails: "+ oneMeeting.getSubject() +" "+oneMeeting.getMeetingDate());
 
         mFragmentMeetingHeadlineBinding.meetingHeadlineTitle.setText(oneMeeting.getSubject());
         mFragmentMeetingHeadlineBinding.meetingHeadlineGuestsList.setText(oneMeeting.getGuestsList());

@@ -29,20 +29,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:textStyle="bold"
-            android:text="@string/meeting_headline_title"
             app:layout_constraintBottom_toTopOf="@+id/meeting_headline_guests_list"
             app:layout_constraintStart_toEndOf="@+id/meeting_headline_thumbnail"
-            app:layout_constraintTop_toTopOf="@+id/meeting_headline_thumbnail" />
+            app:layout_constraintTop_toTopOf="@+id/meeting_headline_thumbnail"
+            tools:text="@string/meeting_headline_title"/>
 
         <TextView
             android:id="@+id/meeting_headline_guests_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="@string/meeting_headline_guests_list"
             app:layout_constraintBottom_toBottomOf="@+id/meeting_headline_thumbnail"
             app:layout_constraintStart_toEndOf="@+id/meeting_headline_thumbnail"
-            app:layout_constraintTop_toBottomOf="@+id/meeting_headline_title"/>
+            app:layout_constraintTop_toBottomOf="@+id/meeting_headline_title"
+            tools:text="@string/meeting_headline_guests_list"/>
 
         <ImageButton
             android:id="@+id/meeting_headline_delete_button"

@@ -10,14 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
 import com.example.mareu.models.MeetingsModel;
-import com.example.mareu.models.RoomsModel;
 
 import java.util.List;
 
 /**
  * Created by JeroSo94 on 12/10/2021.
  */
-public class ListOfMeetingsAdapter extends RecyclerView.Adapter<MeetingHeadlineHolder> {
+public class ListOfMeetingsAdapter extends RecyclerView.Adapter<ListOfMeetingsHolder> {
 
     public interface Listener {
         void onClickDeleteButton(int position);
@@ -31,23 +30,23 @@ public class ListOfMeetingsAdapter extends RecyclerView.Adapter<MeetingHeadlineH
 
     // CONSTRUCTOR
     public ListOfMeetingsAdapter(List<MeetingsModel> meetings, Listener callback) {
-        this.mMeetings = meetings;
+        this.mMeetings = meetings; // list of meetings that the screen can display
         this.mCallback = callback;
     }
 
     @Override
-    public MeetingHeadlineHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ListOfMeetingsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // CREATE VIEW HOLDER AND INFLATING ITS XML LAYOUT
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fragment_meeting_headline, parent, false);
 
-        return new MeetingHeadlineHolder(view);
+        return new ListOfMeetingsHolder(view);
     }
 
     // UPDATE VIEW HOLDER WITH A RECORDED MEETING
     @Override
-    public void onBindViewHolder(MeetingHeadlineHolder holder, int position) {
+    public void onBindViewHolder(ListOfMeetingsHolder holder, int position) {
         Log.d("ListOfMeetingsAdapter", "onBindViewHolder: mMeetings_position"+ position);
         holder.updateWithMeetingDetails(this.mMeetings.get(position), this.mCallback);
     }
