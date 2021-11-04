@@ -1,6 +1,7 @@
 package com.example.mareu.controllers;
 
 import com.example.mareu.models.MeetingsModel;
+import com.example.mareu.models.RoomsModel;
 
 import java.util.List;
 
@@ -13,7 +14,25 @@ public interface MeetingApi {
      * Get all Meetings
      * @return {@link List}
      */
+    List<RoomsModel> getAllRooms();
+
+    /**
+     * Get all Meetings
+     * @return {@link List}
+     */
     List<MeetingsModel> getAllMeetings();
+
+    /**
+     * Get Meetings based on a date filter
+     * @return {@link List}
+     */
+    List<MeetingsModel> getMeetingsFilterByDate(long date);
+
+    /**
+     * Get Meetings based on a room filter
+     * @return {@link List}
+     */
+    List<MeetingsModel> getMeetingsFilterByRoom(String room);
 
     /**
      * Create a meeting

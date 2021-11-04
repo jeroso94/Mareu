@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Mareu</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_menu_item_reset">Aucun filtre</string>
+    <string name="action_menu_item_date">Filtre par date</string>
+    <string name="action_menu_item_room">Filtre par salle</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="list_of_meetings_fragment_label">Liste des réunions</string>
@@ -30,7 +32,7 @@
     <!-- Only for Create-->
     <string name="create_meeting_activity_label">Nouvelle réunion</string>
     <string name="empty_field_error">Saisie requise !</string>
-    <string name="meeting_date_picker_title">Sélectionner une date</string>
+    <string name="meeting_date_picker_title">Calendrier</string>
 
     <!-- Meeting headline -->
     <string name="meeting_headline_title">Sujet de réunion - HH:MM - Salle</string>
@@ -38,4 +40,9 @@
     <string name="meeting_headline_thumbnail">Type</string>
     <string name="meeting_headline_delete_button">Corbeille</string>
 
+    <!-- Only for Filter-->
+    <string name="meeting_date_filter_title">Filtre par date</string>
+    <string name="meeting_room_filter_title">Filtre par salle</string>
+    <string name="action_filter_cancel">Annuler</string>
+    <string name="action_filter_confirm">Ok</string>
 </resources>

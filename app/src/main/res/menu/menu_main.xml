@@ -3,8 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.activities.MeetingsManagerActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_menu_item_reset"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_menu_item_reset"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_menu_item_date"
+        android:orderInCategory="200"
+        android:title="@string/action_menu_item_date"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_menu_item_room"
+        android:orderInCategory="300"
+        android:title="@string/action_menu_item_room"
+        app:showAsAction="never"/>
 </menu>

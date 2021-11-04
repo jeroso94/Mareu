@@ -20,7 +20,7 @@ public class MeetingsModel {
     /**
      * Day of the meeting
      */
-    private String mMeetingDate;
+    private long mMeetingDate;
     /**
      * Start Time
      */
@@ -49,7 +49,7 @@ public class MeetingsModel {
      * @param roomId
      * @param guestsList
      */
-    public MeetingsModel(long id, String subject, String meetingDate, String startTime, String endTime, long roomId, String guestsList){
+    public MeetingsModel(long id, String subject, long meetingDate, String startTime, String endTime, long roomId, String guestsList){
         this.mId = id;
         this.mSubject = subject;
         this.mMeetingDate = meetingDate;
@@ -76,11 +76,11 @@ public class MeetingsModel {
         mSubject = subject;
     }
 
-    public String getMeetingDate() {
+    public long getMeetingDate() {
         return mMeetingDate;
     }
 
-    public void setMeetingDate(String meetingDate) {
+    public void setMeetingDate(long meetingDate) {
         mMeetingDate = meetingDate;
     }
 
