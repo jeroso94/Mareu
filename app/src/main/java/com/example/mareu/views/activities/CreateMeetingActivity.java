@@ -15,12 +15,13 @@ import com.example.mareu.models.MeetingsModel;
 import com.example.mareu.models.RoomsModel;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class CreateMeetingActivity extends AppCompatActivity {
@@ -29,10 +30,11 @@ public class CreateMeetingActivity extends AppCompatActivity {
     private MaterialDatePicker mDatePicker;
     private MaterialTimePicker mStartTimePicker;
     private MaterialTimePicker mEndTimePicker;
-    public static List<RoomsModel> sampleRooms;
     private ArrayAdapter mArrayAdapter;
     private MeetingApi mMeetingApi;
     private MeetingsModel oneMeeting;
+    private SimpleDateFormat sdf;
+    private Calendar myCalendar;
 
     void buildDatePicker(){
         mDatePicker = MaterialDatePicker.Builder.datePicker()
@@ -50,7 +52,11 @@ public class CreateMeetingActivity extends AppCompatActivity {
         mDatePicker.addOnPositiveButtonClickListener (new MaterialPickerOnPositiveButtonClickListener(){
             @Override
             public void onPositiveButtonClick(Object selection) {
-                mActivityCreateMeetingBinding.meetingDate.getEditText().setText(mDatePicker.getHeaderText());
+
+                sdf = new SimpleDateFormat("dd/MM/yyyy");
+                myCalendar = Calendar.getInstance();
+                myCalendar.setTimeInMillis((long) selection);
+                mActivityCreateMeetingBinding.meetingDate.getEditText().setText(sdf.format(myCalendar.getTime()));
             }
         });
     }
@@ -101,18 +107,10 @@ public class CreateMeetingActivity extends AppCompatActivity {
         });
     }
 
-    void generateSampleRooms(){
-        sampleRooms = Arrays.asList(
-                new RoomsModel(1978, "Interne", "Mario"),
-                new RoomsModel(1990, "Interne", "Luigi"),
-                new RoomsModel(2050, "Interne", "Peach")
-        );
-    }
-
     void buildRoomDropDownList() {
 
         List<String> roomNames = new ArrayList<String>();
-        for (RoomsModel extractedRoom:sampleRooms) {
+        for (RoomsModel extractedRoom:mMeetingApi.getAllRooms()) {
             roomNames.add(extractedRoom.getName());
         }
 
@@ -152,10 +150,10 @@ public class CreateMeetingActivity extends AppCompatActivity {
         } else { return 0; }
     }
 
-    void storeData(){
+    void storeData() {
 
         long requestedRoomId = 0;
-        for (RoomsModel room:sampleRooms) {
+        for (RoomsModel room:mMeetingApi.getAllRooms()) {
             /*
             Log.d("storeData()", "storeData: room="+ room.getName());
             Log.d("storeData()", "storeData: roomSelected="+ mActivityCreateMeetingBinding.meetingRoomDropdownList.getText().toString());
@@ -169,22 +167,12 @@ public class CreateMeetingActivity extends AppCompatActivity {
         oneMeeting = new MeetingsModel(
                 System.currentTimeMillis(),
                 mActivityCreateMeetingBinding.meetingSubject.getEditText().getText().toString(),
-                mActivityCreateMeetingBinding.meetingDate.getEditText().getText().toString(),
+                myCalendar.getTimeInMillis(),
                 mActivityCreateMeetingBinding.meetingStartTime.getEditText().getText().toString(),
                 mActivityCreateMeetingBinding.meetingEndTime.getEditText().getText().toString(),
                 requestedRoomId,
                 mActivityCreateMeetingBinding.meetingGuestsList.getEditText().getText().toString()
         );
-
-
-        Log.d("storeData()", "storeData: oneMeeting.id="+ oneMeeting.getId());
-        Log.d("storeData()", "storeData: oneMeeting.subject="+ oneMeeting.getSubject());
-        Log.d("storeData()", "storeData: oneMeeting.date="+ oneMeeting.getMeetingDate());
-        Log.d("storeData()", "storeData: oneMeeting.start="+ oneMeeting.getStartTime());
-        Log.d("storeData()", "storeData: oneMeeting.end="+ oneMeeting.getEndTime());
-        Log.d("storeData()", "storeData: oneMeeting.roomid="+ oneMeeting.getRoomId());
-        Log.d("storeData()", "storeData: oneMeeting.guests="+ oneMeeting.getGuestsList());
-
         saveMeeting();
     }
 
@@ -210,7 +198,6 @@ public class CreateMeetingActivity extends AppCompatActivity {
         mMeetingApi = DI.getService();
         buildDatePicker();
         buildTimePicker();
-        generateSampleRooms();
         buildRoomDropDownList();
 
         mActivityCreateMeetingBinding.saveButton.setOnClickListener(new View.OnClickListener() {
@@ -219,7 +206,6 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 if (checkData() != 1 ) {
                     /*Snackbar.make(v, "Execution de storeData() et saveMeeting()", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-
                      */
                     storeData();
                 }
@@ -233,5 +219,4 @@ public class CreateMeetingActivity extends AppCompatActivity {
         closeMeetingForm();
         return true;
     }
-
 }
