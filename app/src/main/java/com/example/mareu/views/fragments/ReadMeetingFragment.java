@@ -1,27 +1,28 @@
 package com.example.mareu.views.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.mareu.R;
+import com.example.mareu.controllers.DI;
+import com.example.mareu.controllers.MeetingApi;
 import com.example.mareu.databinding.FragmentReadMeetingBinding;
+import com.example.mareu.models.MeetingsModel;
+import com.example.mareu.models.RoomsModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ReadMeetingFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "clickedMeetingId";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-
-    private FragmentReadMeetingBinding binding;
+    private FragmentReadMeetingBinding mFragmentReadMeetingBinding;
+    private MeetingApi mMeetingApi;
+    private MeetingsModel oneMeeting;
+    private Long mMeetingId;
 
     public ReadMeetingFragment() {
         // Required empty public constructor
@@ -38,7 +39,7 @@ public class ReadMeetingFragment extends Fragment {
     public static ReadMeetingFragment newInstance(Long meetingId) {
         ReadMeetingFragment fragment = new ReadMeetingFragment();
         Bundle args = new Bundle();
-        args.putLong(ARG_PARAM1, meetingId);
+        args.putLong("clickedMeetingId", meetingId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,8 +48,9 @@ public class ReadMeetingFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mMeetingId = getArguments().getLong("clickedMeetingId");
         }
+        mMeetingApi = DI.getService();
     }
 
     @Override
@@ -56,16 +58,34 @@ public class ReadMeetingFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        mFragmentReadMeetingBinding = FragmentReadMeetingBinding.inflate(inflater, container, false);
+        oneMeeting = mMeetingApi.readMeeting(mMeetingId);
 
-        binding = FragmentReadMeetingBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar converterCalendar = Calendar.getInstance();
+        converterCalendar.setTimeInMillis(oneMeeting.getMeetingDate());
+
+
+        String requestedRoomName = "";
+        for (RoomsModel room:mMeetingApi.getAllRooms()) {
+            Log.d("ReadMeetingFragment", "onCreateView: " + room.getId() +" | "+ oneMeeting.getRoomId());
+            if  (room.getId() == oneMeeting.getRoomId()) {
+                requestedRoomName = room.getName();
+            }
+        }
+
+        mFragmentReadMeetingBinding.meetingSubject.setText(oneMeeting.getSubject());
+        mFragmentReadMeetingBinding.meetingDetails.setText("Enregistré pour le " + sdf.format(converterCalendar.getTime())
+                + " de " + oneMeeting.getStartTime() + " à " + oneMeeting.getEndTime() +" en salle " + requestedRoomName);
+        mFragmentReadMeetingBinding.meetingGuestsList.setText(oneMeeting.getGuestsList());
+        return mFragmentReadMeetingBinding.getRoot();
 
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        mFragmentReadMeetingBinding = null;
     }
 
 }
