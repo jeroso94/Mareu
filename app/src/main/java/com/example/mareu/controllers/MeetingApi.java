@@ -51,7 +51,7 @@ public interface MeetingApi {
 
     /**
      * Delete a meeting
-     * @param index
+     * @param oneMeeting
      */
-    void deleteMeeting(Integer index);
+    void deleteMeeting(MeetingsModel oneMeeting);
 }

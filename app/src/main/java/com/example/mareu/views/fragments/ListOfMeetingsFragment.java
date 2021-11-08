@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
 import com.example.mareu.controllers.DI;
+import com.example.mareu.controllers.DeleteMeetingEvent;
 import com.example.mareu.controllers.ItemClickSupport;
 import com.example.mareu.controllers.MeetingApi;
 import com.example.mareu.databinding.FragmentListOfMeetingsBinding;
@@ -27,10 +28,13 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.Calendar;
 import java.util.List;
 
-public class ListOfMeetingsFragment extends Fragment implements ListOfMeetingsAdapter.Listener {
+public class ListOfMeetingsFragment extends Fragment {
 
     private FragmentListOfMeetingsBinding mFragmentListOfMeetingsBinding;
     private MaterialDatePicker mDatePicker;
@@ -99,17 +103,11 @@ public class ListOfMeetingsFragment extends Fragment implements ListOfMeetingsAd
         builder.show();
     }
 
-    @Override
-    public void onClickDeleteButton(int position) {
-        mMeetingApi.deleteMeeting(position);
-        loadListOfMeetings();
-    }
-
     /**
      * Configure onClick listener for RecyclerView
      */
     private void recyclerViewOnClickListener(){
-        ItemClickSupport.addTo(mFragmentListOfMeetingsBinding.listOfMeetings, R.layout.fragment_meeting_headline)
+        ItemClickSupport.addTo(mFragmentListOfMeetingsBinding.listOfMeetings, R.layout.meeting_headline)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -128,7 +126,7 @@ public class ListOfMeetingsFragment extends Fragment implements ListOfMeetingsAd
      */
     private void loadListOfMeetings() {
         // Create adapter passing in the sample user data
-        mListOfMeetingsAdapter = new ListOfMeetingsAdapter(this.mMeetings, this);
+        mListOfMeetingsAdapter = new ListOfMeetingsAdapter(this.mMeetings);
         // Attach the adapter to the recyclerview to populate items
         mFragmentListOfMeetingsBinding.listOfMeetings.setAdapter(this.mListOfMeetingsAdapter);
         // Set layout manager to position the items
@@ -205,8 +203,32 @@ public class ListOfMeetingsFragment extends Fragment implements ListOfMeetingsAd
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         loadListOfMeetings();
     }
+
+    /**
+     * Fired if the user clicks on a delete button
+     * @param event
+     */
+    @Subscribe
+    public void onDeleteMeeting(DeleteMeetingEvent event) {
+        mMeetingApi.deleteMeeting(event.oneMeeting);
+        mMeetings = mMeetingApi.getAllMeetings();
+        loadListOfMeetings();
+    }
+
 }

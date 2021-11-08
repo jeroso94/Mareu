@@ -80,7 +80,6 @@ public class MeetingControllers implements MeetingApi{
     @Override
     public void createMeeting(MeetingsModel oneMeeting) {
         mMeetings.add(oneMeeting);
-        Log.d("MeetingControllers", "createMeeting: " + mMeetings.get(3).getSubject());
     }
 
 
@@ -106,11 +105,11 @@ public class MeetingControllers implements MeetingApi{
     /**
      * {@inheritDoc}
      * CRUD - DELETE A MEETING
-     * @param index
+     * @param oneMeeting
      */
     @Override
-    public void deleteMeeting(Integer index) {
-        mMeetings.remove(index);
+    public void deleteMeeting(MeetingsModel oneMeeting) {
+        mMeetings.remove(oneMeeting);
     }
 
 }
