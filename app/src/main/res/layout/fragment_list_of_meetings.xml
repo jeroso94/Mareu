@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".views.fragments.ListOfMeetingsFragment"
-    tools:listitem="@layout/fragment_meeting_headline"/>
+    tools:listitem="@layout/meeting_headline"/>
