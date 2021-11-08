@@ -18,4 +18,12 @@ public class DI {
     public static MeetingApi getService() {
         return service;
     }
+
+    /**
+     * Get always a new instance on @{@link MeetingApi}. Useful for tests, so we ensure the context is clean.
+     * @return
+     */
+    public static MeetingApi getTestDedicatedService(){
+        return new MeetingControllers();
+    }
 }
