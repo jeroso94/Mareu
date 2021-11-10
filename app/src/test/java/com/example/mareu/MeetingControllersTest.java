@@ -25,7 +25,9 @@ public class MeetingControllersTest {
     @Before
     public void setup() { service = DI.getTestDedicatedService(); }
 
-    // -- Ensure methods "getAllRooms" and "getAllMeetings" are returning the full list of sample items
+    /**
+     * Ensure methods "getAllRooms" and "getAllMeetings" are returning the full list of sample items
+     */
     @Test
     public void getAllRoomsWithSuccess() {
         // Prepare reference sample
@@ -46,8 +48,9 @@ public class MeetingControllersTest {
         assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetings.toArray()));
     }
 
-
-    // -- Ensure methods "getMeetingsFilterByDate" and "getMeetingsFilterByRooms" is returning a list filtered based on a provided criteria
+    /**
+     * Ensure methods "getMeetingsFilterByDate" and "getMeetingsFilterByRooms" is returning a list filtered based on a provided criteria
+     */
     @Test
     public void getMeetingsFilterByDateWithSuccess() {
         // Prepare reference sample
@@ -71,7 +74,9 @@ public class MeetingControllersTest {
     }
 
 
-    // -- Ensure method "createMeeting" is adding a new meeting in the meetings list
+    /**
+     * Ensure method "createMeeting" is adding a new meeting in the meetings list
+     */
     @Test
     public void createMeetingWithSuccess() {
         // Prepare reference sample
@@ -98,7 +103,9 @@ public class MeetingControllersTest {
         assertEquals(4, service.getAllMeetings().size());
     }
 
-    // -- Ensure method "readMeeting" is retrieving from the list the right meeting
+    /**
+     * Ensure method "readMeeting" is retrieving from the list the right meeting
+     */
     @Test
     public void readMeetingWithSuccess() {
         // Prepare reference sample
@@ -109,7 +116,9 @@ public class MeetingControllersTest {
         assertEquals(requestedMeeting, oneMeeting);
     }
 
-    // -- Ensure method "deleteMeeting" is deleting the meeting from the list
+    /**
+     * Ensure method "deleteMeeting" is deleting the meeting from the list
+     */
     @Test
     public void deleteMeetingWithSuccess() {
         // Prepare reference sample
