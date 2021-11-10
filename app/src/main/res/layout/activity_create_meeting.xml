@@ -31,6 +31,7 @@
             app:layout_constraintTop_toTopOf="@id/form_layout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meeting_subject_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -53,6 +54,7 @@
             app:startIconDrawable="@drawable/ic_baseline_calendar_today_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meeting_date_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
@@ -76,6 +78,7 @@
             app:startIconDrawable="@drawable/ic_baseline_access_time_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meeting_start_time_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
@@ -98,6 +101,7 @@
             app:startIconDrawable="@drawable/ic_baseline_access_time_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meeting_end_time_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
@@ -138,6 +142,7 @@
             app:layout_constraintTop_toBottomOf="@id/meeting_room">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meeting_guests_list_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
