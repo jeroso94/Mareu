@@ -14,8 +14,8 @@
             android:id="@+id/meeting_headline_thumbnail"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="10dp"
             android:contentDescription="@string/meeting_headline_thumbnail"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,24 +25,26 @@
 
         <TextView
             android:id="@+id/meeting_headline_title"
-            android:layout_width="303dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="62dp"
+            android:layout_marginEnd="24dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/meeting_headline_guests_list"
-            app:layout_constraintEnd_toStartOf="@id/meeting_headline_delete_button"
             app:layout_constraintStart_toEndOf="@+id/meeting_headline_thumbnail"
+            app:layout_constraintEnd_toStartOf="@+id/meeting_headline_delete_button"
             app:layout_constraintTop_toTopOf="@+id/meeting_headline_thumbnail"
+
             tools:text="@string/meeting_headline_title" />
 
         <TextView
             android:id="@+id/meeting_headline_guests_list"
-            android:layout_width="303dp"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/meeting_headline_thumbnail"
-            app:layout_constraintEnd_toStartOf="@id/meeting_headline_delete_button"
-            app:layout_constraintStart_toEndOf="@+id/meeting_headline_thumbnail"
+            app:layout_constraintStart_toStartOf="@+id/meeting_headline_title"
             app:layout_constraintTop_toBottomOf="@+id/meeting_headline_title"
             tools:text="@string/meeting_headline_guests_list" />
 
