@@ -1,153 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="32dp"
-    android:layout_marginBottom="32dp"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
+    android:orientation="vertical"
     tools:context=".views.activities.CreateMeetingActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/meeting_subject"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/form_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:errorEnabled="true"
-
-        android:hint="@string/meeting_subject"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-    <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/meeting_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_space_between_lines"
-        android:layout_marginEnd="@dimen/space_between_columns"
-        app:layout_constraintTop_toBottomOf="@id/meeting_subject"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/saveButton"
-        app:errorEnabled="true"
+        app:layout_constraintTop_toBottomOf="@+id/appbarlayout">
 
-        app:startIconDrawable="@drawable/ic_baseline_calendar_today_24"
-        app:startIconContentDescription="@string/meeting_date"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/meeting_subject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:errorEnabled="true"
 
-        android:hint="@string/meeting_date"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:hint="@string/meeting_subject"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/meeting_date"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="@dimen/large_space_between_lines"
+            android:layout_marginEnd="@dimen/space_between_columns"
+            app:layout_constraintTop_toBottomOf="@id/meeting_subject"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/saveButton"
+            app:errorEnabled="true"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/meeting_start_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_space_between_lines"
-        android:layout_marginEnd="@dimen/space_between_columns"
-        app:layout_constraintTop_toBottomOf="@+id/meeting_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/meeting_end_time"
-        app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_baseline_calendar_today_24"
+            app:startIconContentDescription="@string/meeting_date"
 
-        app:startIconDrawable="@drawable/ic_baseline_access_time_24"
-        app:startIconContentDescription="@string/meeting_start_time"
+            android:hint="@string/meeting_date"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        android:hint="@string/meeting_start_time"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/meeting_start_time"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="time" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="@dimen/large_space_between_lines"
+            android:layout_marginEnd="@dimen/space_between_columns"
+            app:layout_constraintTop_toBottomOf="@+id/meeting_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/meeting_end_time"
+            app:errorEnabled="true"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/meeting_end_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_space_between_lines"
-        app:layout_constraintTop_toBottomOf="@id/meeting_date"
-        app:layout_constraintStart_toEndOf="@id/meeting_start_time"
-        app:layout_constraintEnd_toEndOf="@id/meeting_date"
-        app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_baseline_access_time_24"
+            app:startIconContentDescription="@string/meeting_start_time"
 
-        app:startIconDrawable="@drawable/ic_baseline_access_time_24"
-        app:startIconContentDescription="@string/meeting_end_time"
+            android:hint="@string/meeting_start_time"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        android:hint="@string/meeting_end_time"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="time" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/meeting_end_time"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="time"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="@dimen/large_space_between_lines"
+            app:layout_constraintTop_toBottomOf="@id/meeting_date"
+            app:layout_constraintStart_toEndOf="@id/meeting_start_time"
+            app:layout_constraintEnd_toEndOf="@id/meeting_date"
+            app:errorEnabled="true"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/meeting_room"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_space_between_lines"
-        app:layout_constraintTop_toBottomOf="@id/meeting_end_time"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/meeting_end_time"
-        app:errorEnabled="true"
+            app:startIconDrawable="@drawable/ic_baseline_access_time_24"
+            app:startIconContentDescription="@string/meeting_end_time"
 
-        android:hint="@string/meeting_room"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:hint="@string/meeting_end_time"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <AutoCompleteTextView
-            android:id="@+id/meeting_room_dropdown_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:inputType="none"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/meeting_guests_list"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_space_between_lines"
-        app:layout_constraintTop_toBottomOf="@id/meeting_room"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/meeting_room"
-        app:errorEnabled="true"
-
-        android:hint="@string/meeting_guests_list"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/meeting_room"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="@dimen/large_space_between_lines"
+            app:layout_constraintTop_toBottomOf="@id/meeting_end_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/meeting_end_time"
+            app:errorEnabled="true"
 
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_space_between_lines"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/meeting_date"
-        app:layout_constraintTop_toBottomOf="@id/meeting_subject"
+            android:hint="@string/meeting_room"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-        android:text="@string/save_button"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <AutoCompleteTextView
+                android:id="@+id/meeting_room_dropdown_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/meeting_guests_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_space_between_lines"
+            app:layout_constraintTop_toBottomOf="@id/meeting_room"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/meeting_room"
+            app:errorEnabled="true"
+
+            android:hint="@string/meeting_guests_list"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_space_between_lines"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/meeting_date"
+            app:layout_constraintTop_toBottomOf="@id/meeting_subject"
+
+            android:text="@string/save_button"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
