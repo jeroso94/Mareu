@@ -26,9 +26,10 @@
                 <!-- Media -->
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="194dp"
+                    android:layout_height="128dp"
                     app:srcCompat="@drawable/ic_baseline_people_320"
-                    android:scaleType="centerCrop"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
                     android:contentDescription="@string/content_description_baseline_people"
                     />
 
